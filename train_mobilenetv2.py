@@ -87,14 +87,14 @@ def main():
         train_data_loader = torch.utils.data.DataLoader(train_dataset,
                                                         batch_sampler=train_batch_sampler,
                                                         pin_memory=True,
-                                                        num_workers=0,
+                                                        num_workers=nw,
                                                         collate_fn=train_dataset.collate_fn)
     else:
         train_data_loader = torch.utils.data.DataLoader(train_dataset,
                                                         batch_size=batch_size,
                                                         shuffle=True,
                                                         pin_memory=True,
-                                                        num_workers=0,
+                                                        num_workers=nw,
                                                         collate_fn=train_dataset.collate_fn)
 
     # load validation data set
@@ -104,7 +104,7 @@ def main():
                                                   batch_size=1,
                                                   shuffle=False,
                                                   pin_memory=True,
-                                                  num_workers=0,
+                                                  num_workers=nw,
                                                   collate_fn=val_dataset.collate_fn)
 
     # create model num_classes equal background + 20 classes
@@ -175,7 +175,7 @@ def main():
     lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer,
                                                    step_size=3,
                                                    gamma=0.33)
-    num_epochs = 20
+    num_epochs = 15
     for epoch in range(init_epochs, num_epochs+init_epochs, 1):
         # train for one epoch, printing every 50 iterations
         mean_loss, lr = utils.train_one_epoch(model, optimizer, train_data_loader,
