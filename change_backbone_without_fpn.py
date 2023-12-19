@@ -23,12 +23,12 @@ def create_model(num_classes):
     backbone.out_channels = 512
 
     # resnet50 backbone
-    # backbone = torchvision.models.resnet50(pretrained=True)
+    backbone = torchvision.models.resnet50(pretrained=True)
     # # print(backbone)
-    # backbone = create_feature_extractor(backbone, return_nodes={"layer3": "0"})
+    backbone = create_feature_extractor(backbone, return_nodes={"layer3": "0"})
     # # out = backbone(torch.rand(1, 3, 224, 224))
     # # print(out["0"].shape)
-    # backbone.out_channels = 1024
+    backbone.out_channels = 1024
 
     # EfficientNetB0
     # backbone = torchvision.models.efficientnet_b0(pretrained=True)
